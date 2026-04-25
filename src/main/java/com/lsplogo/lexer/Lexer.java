@@ -265,7 +265,6 @@ public class Lexer {
 
     private void readVariable(List<Token> tokens, int startLine, int startColumn) {
         StringBuilder value = new StringBuilder();
-        value.append(':');
 
         while (isWordPart(peek())) {
             value.append(advance());
@@ -276,7 +275,6 @@ public class Lexer {
 
     private void readString(List<Token> tokens, int startLine, int startColumn) {
         StringBuilder value = new StringBuilder();
-        value.append('"');
 
         while (!endOfInput() && peek() != ' ' && peek() != '\t' && peek() != '\n') {
             value.append(advance());
@@ -287,7 +285,6 @@ public class Lexer {
 
     private void readComment(List<Token> tokens, int startLine, int startColumn) {
         StringBuilder value = new StringBuilder();
-        value.append(";");
         
         while (!endOfInput() && peek() != '\n') {
             value.append(advance());

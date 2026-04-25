@@ -64,9 +64,9 @@ public class LexerTest extends TestCase {
         List<Token> tokens = lexer.tokenize();
         assertEquals("three variables + EOF", 4, tokens.size());
         assertTokenType(TokenType.VARIABLE, tokens.get(0).getType(), "colon prefix marks variable");
-        assertTokenValue(":x", tokens.get(0).getValue(), "variable value includes colon");
+        assertTokenValue("x", tokens.get(0).getValue(), "variable name should match");
         assertTokenType(TokenType.VARIABLE, tokens.get(1).getType(), "variable multi-char");
-        assertTokenValue(":var", tokens.get(1).getValue(), "multi-char variable value normalized to lowercase");
+        assertTokenValue("var", tokens.get(1).getValue(), "multi-char variable value normalized to lowercase");
         assertTokenType(TokenType.VARIABLE, tokens.get(2).getType(), "variable with underscore");
     }
 
@@ -97,9 +97,9 @@ public class LexerTest extends TestCase {
         List<Token> tokens = lexer.tokenize();
         assertEquals("two strings + EOF", 3, tokens.size());
         assertTokenType(TokenType.STRING, tokens.get(0).getType(), "quoted text should be STRING");
-        assertTokenValue("\"hello", tokens.get(0).getValue(), "string should match");
+        assertTokenValue("hello", tokens.get(0).getValue(), "string should match");
         assertTokenType(TokenType.STRING, tokens.get(1).getType(), "multi-word string");
-        assertTokenValue("\"turtle_graphics", tokens.get(1).getValue(), "string value should match");
+        assertTokenValue("turtle_graphics", tokens.get(1).getValue(), "string value should match");
     }
 
     public void testOperators() {
@@ -213,7 +213,7 @@ public class LexerTest extends TestCase {
         assertEquals("make count 10 + EOF", 4, tokens.size());
         assertTokenType(TokenType.MAKE, tokens.get(0).getType(), "make keyword");
         assertTokenType(TokenType.STRING, tokens.get(1).getType(), "variable name as string");
-        assertTokenValue("\"count", tokens.get(1).getValue(), "variable name");
+        assertTokenValue("count", tokens.get(1).getValue(), "variable name");
         assertTokenType(TokenType.NUMBER, tokens.get(2).getType(), "number value");
         assertTokenValue("10", tokens.get(2).getValue(), "number 10");
     }
@@ -238,7 +238,7 @@ public class LexerTest extends TestCase {
         List<Token> tokens = lexer.tokenize();
 
         assertTokenType(TokenType.COMMENT, tokens.get(0).getType(), "semicolon starts a comment");
-        assertTokenValue(";this is a comment", tokens.get(0).getValue(), "comment text should match");
+        assertTokenValue("this is a comment", tokens.get(0).getValue(), "comment text should match");
         assertTokenType(TokenType.NEWLINE, tokens.get(1).getType(), "newline after comment");
         assertTokenType(TokenType.FORWARD, tokens.get(2).getType(), "next line still tokenized");
     }
@@ -252,7 +252,7 @@ public class LexerTest extends TestCase {
         assertTokenType(TokenType.NUMBER, tokens.get(1).getType(), "decimal number");
         assertTokenValue("3.5", tokens.get(1).getValue(), "decimal value");
         assertTokenType(TokenType.VARIABLE, tokens.get(2).getType(), "variable");
-        assertTokenValue(":x", tokens.get(2).getValue(), "variable value");
+        assertTokenValue("x", tokens.get(2).getValue(), "variable name");
     }
 
 }
