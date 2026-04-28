@@ -1,0 +1,4 @@
+; Intentionally includes lexical/syntax issues
+forward 50
+@badtoken
+repeat 4 [ forward 10 right 90

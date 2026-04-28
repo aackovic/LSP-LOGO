@@ -1,0 +1,16 @@
+to square :size
+  repeat 4 [
+    forward :size
+    right 90
+  ]
+end
+
+make "sidelength 100
+square :sidelength
+
+bk 25 + 20
+fd :sidelength
+
+;abcdef fd 50
+
+fd :sidelength

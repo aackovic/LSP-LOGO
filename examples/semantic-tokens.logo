@@ -1,0 +1,15 @@
+; Mix of token types for semantic highlighting
+; keyword, number, string, variable, identifier, operator
+make "steps 25
+to square :size
+  repeat 4 [
+    forward :size
+    right 90
+  ]
+end
+
+if :steps > 10 [
+  label "drawing
+]
+
+square :steps

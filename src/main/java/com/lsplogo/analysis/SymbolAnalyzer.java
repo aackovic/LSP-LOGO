@@ -48,7 +48,9 @@ public class SymbolAnalyzer {
         return symbols;
     }
 
-    //to procname inputs ... statements ... end
+    /*
+    to procname inputs ... statements ... end
+    */
     private void analyzeProcedureDeclaration() {
         advance();
 
@@ -86,7 +88,10 @@ public class SymbolAnalyzer {
         symbols.add(new Symbol(procName, SymbolType.PROCEDURE, procLine, procColumn));
     }
 
-    // make varname expr || localmake varname expr
+    /* 
+    make varname expr
+    localmake varname expr
+    */
     private void analyzeVariableDeclaration() {
         advance();
 

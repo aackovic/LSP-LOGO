@@ -270,7 +270,7 @@ public class Lexer {
             value.append(advance());
         }
 
-        tokens.add(new Token(TokenType.VARIABLE, value.toString().toLowerCase(Locale.ROOT), startLine, startColumn));
+        tokens.add(new Token(TokenType.VARIABLE, value.toString().toLowerCase(Locale.ROOT), startLine, startColumn, value.length() + 1));
     }
 
     private void readString(List<Token> tokens, int startLine, int startColumn) {
@@ -280,7 +280,7 @@ public class Lexer {
             value.append(advance());
         }
 
-        tokens.add(new Token(TokenType.STRING, value.toString().trim(), startLine, startColumn));
+        tokens.add(new Token(TokenType.STRING, value.toString().trim(), startLine, startColumn, value.length() + 1));
     }
 
     private void readComment(List<Token> tokens, int startLine, int startColumn) {
@@ -290,6 +290,6 @@ public class Lexer {
             value.append(advance());
         }
 
-        tokens.add(new Token(TokenType.COMMENT, value.toString(), startLine, startColumn));
+        tokens.add(new Token(TokenType.COMMENT, value.toString(), startLine, startColumn, value.length() + 1));
     }
 }

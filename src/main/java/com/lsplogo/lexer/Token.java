@@ -8,11 +8,15 @@ public class Token {
     private final int length;
 
     public Token(TokenType type, String value, int line, int column) {
+        this(type, value, line, column, value.length());
+    }
+
+    public Token(TokenType type, String value, int line, int column, int length) {
         this.type = type;
         this.value = value;
         this.line = line;
         this.column = column;
-        this.length = value.length();
+        this.length = length;
     }
 
     @Override
