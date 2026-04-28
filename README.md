@@ -1,6 +1,6 @@
 # lsp-logo
 
-A Language Server Protocol (LSP) server for the LOGO programming language, written in Java.
+A Language Server Protocol (LSP) server for the LOGO programming language, written in Java 17.
 
 ## Features
 
@@ -11,6 +11,13 @@ This server currently supports:
 - Hover information for symbols
 
 **Project layout**
+
+Working directory example:
+
+- `/Users/andrej/IdeaProjects/lsp-logo/`
+
+Inside of this directory which is essentially a maven project is all the code.
+The structure of the project is following:
 
 - `src/main/java/com/lsplogo/lexer`: `Lexer`, `Token` and `TokenType` classes that tokenize LOGO source.
 - `src/main/java/com/lsplogo/analysis`: `Symbol`, `SymbolAnalyzer` and `SymbolType` analyze for symbols for procedure and variable declarations.
@@ -65,16 +72,13 @@ Example of absolute path to jar file:
 java -jar /Users/andrej/IdeaProjects/lsp-logo/target/lsp-logo-1.0-SNAPSHOT.jar
 ```
 
-4. Set the working directory to your project directory
+<img width="1219" height="717" alt="Image" src="https://github.com/user-attachments/assets/75da96c8-7f8b-44db-b3ee-5eed8660efc8" />
 
-Example of path to working directory:
+4. Map the server to `*.logo` files.
 
-```bash
-/Users/andrej/IdeaProjects/lsp-logo
-```
-
-5. Map the server to `*.logo` files.
-6. Open a LOGO file. The server starts automatically.
+<img width="1222" height="720" alt="Image" src="https://github.com/user-attachments/assets/27e4faad-b908-4760-b658-f99aaa284500" />
+   
+5. Open a LOGO file. The server starts automatically.
 If the server doesn't start automatically, restart it manually in language server tab
 
 ## Example files
