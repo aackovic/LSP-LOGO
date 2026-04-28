@@ -11,10 +11,8 @@ For now empty class as it is only needed to provide a stub for the LogoLanguageS
 
 public class LogoWorkspaceService implements WorkspaceService {
 
-    private LanguageClient client;
-
     public void connect(LanguageClient client) {
-        this.client = client;
+
     }
 
     @Override

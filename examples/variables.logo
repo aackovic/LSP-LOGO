@@ -1,0 +1,35 @@
+; Example with variables and loops
+make "gridSize 5
+make "cellSize 30
+make "totalSize 150
+
+to drawGrid :rows :cols :size
+  repeat :rows [
+    repeat :cols [
+      forward :size
+      right 90
+      forward :size
+      right 270
+    ]
+    forward :size
+    right 90
+  ]
+end
+
+to spiral :depth :increment
+  localmake "distance 10
+  repeat :depth [
+    forward :distance
+    right 90
+    localmake "distance :distance + :increment
+  ]
+end
+
+; Use the variables
+pendown
+drawGrid :gridSize :gridSize :cellSize
+penup
+backward :totalSize
+right 90
+pendown
+spiral 12 5

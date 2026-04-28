@@ -10,6 +10,17 @@ This server currently supports:
 - Go-to-declaration for procedure and variable references
 - Hover information for symbols
 
+**Project layout**
+
+- `src/main/java/com/lsplogo/lexer`: `Lexer`, `Token` and `TokenType` classes that tokenize LOGO source.
+- `src/main/java/com/lsplogo/analysis`: `Symbol`, `SymbolAnalyzer` and `SymbolType` analyze for symbols for procedure and variable declarations.
+- `src/main/java/com/lsplogo/server`: LSP server implementation (`LogoLanguageServer`, `LogoTextDocumentService`, `LogoWorkspaceService`) and helper classes.
+- `src/test/java`: Unit tests (`LexerTest`, `SymbolAnalyzerTest`, `ServerTest`).
+- `examples/`: Example `.logo` files used for manual testing and demonstration.
+- `pom.xml`: Maven build and packaging (compiler and Shade plugin to create the runnable jar).
+- `src/main/java/com/lsplogo/App.java`: Application entry point (main class) used by the packaged jar.
+
+
 ## Testing
 
 Use Maven to run tests for the project:
@@ -46,15 +57,17 @@ This project is intended to be used through a language server client.
 
 1. Install the `lsp4ij` plugin in IntelliJ IDEA.
 2. Open the language server configuration for this project.
-3. Set the command to the shaded jar (use absolute path):
+3. Set the command to the shaded jar (use absolute path).
 
-Example of absolute path to jar file
+Example of absolute path to jar file:
 
 ```bash
 java -jar /Users/andrej/IdeaProjects/lsp-logo/target/lsp-logo-1.0-SNAPSHOT.jar
 ```
 
-4. Set the working directory to:
+4. Set the working directory to your project directory
+
+Example of path to working directory:
 
 ```bash
 /Users/andrej/IdeaProjects/lsp-logo
@@ -62,6 +75,7 @@ java -jar /Users/andrej/IdeaProjects/lsp-logo/target/lsp-logo-1.0-SNAPSHOT.jar
 
 5. Map the server to `*.logo` files.
 6. Open a LOGO file. The server starts automatically.
+If the server doesn't start automatically, restart it manually in language server tab
 
 ## Example files
 

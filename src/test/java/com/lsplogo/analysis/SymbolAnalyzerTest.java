@@ -2,6 +2,8 @@ package com.lsplogo.analysis;
 
 import com.lsplogo.lexer.Lexer;
 import com.lsplogo.lexer.Token;
+import com.lsplogo.lexer.TokenType;
+
 import junit.framework.TestCase;
 import java.util.List;
 
@@ -155,6 +157,66 @@ public class SymbolAnalyzerTest extends TestCase {
         Symbol sideLength = analyzer.findSymbol("sideLength");
         assertNotNull("should find sideLength variable", sideLength);
         assertEquals("sideLength is a variable", SymbolType.VARIABLE, sideLength.type);
+    }
+
+    public void testMarkerInclusiveRanges() {
+        String src = ";this is a comment\nmake \"count 10\nprint :count";
+        Lexer lexer = new Lexer(src);
+        List<Token> tokens = lexer.tokenize();
+
+        Token comment = null;
+        Token str = null;
+        Token varRef = null;
+
+        for (Token t : tokens) {
+            if (t.getType() == TokenType.COMMENT && comment == null) comment = t;
+            if (t.getType() == TokenType.STRING && str == null) str = t;
+            if (t.getType() == TokenType.VARIABLE && varRef == null) varRef = t;
+        }
+
+        assertNotNull("comment token present", comment);
+        assertNotNull("string token present", str);
+        assertNotNull("variable token present", varRef);
+
+        assertEquals("comment length includes ';'", comment.getValue().length() + 1, comment.getLength());
+        assertEquals("string length includes \" marker", str.getValue().length() + 1, str.getLength());
+        assertEquals("variable length includes ':' marker", varRef.getValue().length() + 1, varRef.getLength());
+
+        assertEquals("comment at line 0", 0, comment.getLine());
+        assertEquals("comment column 0", 0, comment.getColumn());
+    }
+
+    public void testDeclarationPositionAccuracy() {
+        String src = "to square\nforward 10\nend\nmake \"count 10";
+        Lexer lexer = new Lexer(src);
+        List<Token> tokens = lexer.tokenize();
+
+        SymbolAnalyzer analyzer = new SymbolAnalyzer(tokens);
+        List<Symbol> symbols = analyzer.analyze();
+
+        Symbol proc = analyzer.findSymbol("square");
+        Symbol var = analyzer.findSymbol("count");
+
+        assertNotNull("procedure symbol found", proc);
+        assertNotNull("variable symbol found", var);
+        assertNotNull(symbols.get(0));
+        assertNotNull(symbols.get(1));
+
+        Token procToken = null;
+        Token varToken = null;
+        for (Token t : tokens) {
+            if (t.getType() == TokenType.IDENTIFIER && t.getValue().equals("square")) procToken = t;
+            if ((t.getType() == TokenType.STRING || t.getType() == TokenType.VARIABLE) && t.getValue().equals("count")) varToken = t;
+        }
+
+        assertNotNull("proc token present", procToken);
+        assertNotNull("var token present", varToken);
+
+        assertEquals("procedure line matches token", procToken.getLine(), proc.line);
+        assertEquals("procedure column matches token", procToken.getColumn(), proc.column);
+
+        assertEquals("variable line matches token", varToken.getLine(), var.line);
+        assertEquals("variable column matches token", varToken.getColumn(), var.column);
     }
 
 }

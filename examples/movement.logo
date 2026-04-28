@@ -1,4 +1,4 @@
-; Basic movement smoke test
+; Basic movement test
 clearscreen
 pendown
 forward 60

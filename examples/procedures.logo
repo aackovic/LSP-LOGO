@@ -1,0 +1,27 @@
+; Example with procedure declarations
+to star :size
+  repeat 5 [
+    forward :size
+    right 144
+  ]
+end
+
+to polygon :sides :length
+  repeat :sides [
+    forward :length
+    right 360 / :sides
+  ]
+end
+
+to flower :petals :petalSize
+  repeat :petals [
+    star :petalSize
+    right 360 / :petals
+  ]
+end
+
+; Draw examples
+flower 8 30
+pendown
+forward 100
+polygon 6 50

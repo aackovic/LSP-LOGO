@@ -1,3 +1,4 @@
+;Test used in ServerTest
 to square :size
   repeat 4 [
     forward :size

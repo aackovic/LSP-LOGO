@@ -1,0 +1,22 @@
+; Nested procedures example
+; Outer procedure defines and calls an inner procedure
+
+to outer :size
+  ; local helper defined inside outer
+  to inner :count
+    if :count = 0 [stop]
+    forward :size
+    right 45
+    inner :count - 1
+  end
+
+  ; call the inner helper
+  inner 4
+  ; continue with outer work
+  forward :size
+end
+
+; Call outer from top-level
+pendown
+outer 30
+penup
